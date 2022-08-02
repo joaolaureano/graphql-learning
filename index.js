@@ -2,46 +2,38 @@ const {ApolloServer, gql} = require('apollo-server')
 
 
 const typeDefs = gql`
-    scalar Date
 
-    type Usuario {
+    type Produto {
         id: ID
         nome: String!
-        email: String!
-        idade: Int
-        salario: Float
-        vip: Boolean
+        preco: Float!
+        desconto: Float
+        precoComDesconto: Float
+
     }
 
-    type Query {
-        horaAtual: Date
-        usuarioLogado: Usuario
+    type Query{
+        produtoEmDestaque: Produto
     }
 `
 
 const resolvers = {
-    Usuario: {
-        salario(usuario) {
-            return usuario.salario_real
+    Produto: {
+        precoComDesconto(produto) {
+            return produto.desconto ? produto.preco * (1 - produto.desconto) : produto.preco;
         }
     },
     Query: {
-        horaAtual() {
-            return `${new Date}`
-        },
-        usuarioLogado() {
+        produtoEmDestaque() {
             return {
                 id: '1',
-                nome: 'João',
-                email: 'Joao@gmail.com',
-                idade: 20,
-                salario_real: 1000.00,
-                vip: true
+                nome: 'Notebook',
+                preco: '1999.99',
+                // desconto: 0.15
             }
         }
     }
 }
-
 
 const server = new ApolloServer({
     typeDefs,
