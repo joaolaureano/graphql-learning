@@ -20,6 +20,11 @@ const typeDefs = gql`
 `
 
 const resolvers = {
+    Usuario: {
+        salario(usuario) {
+            return usuario.salario_real
+        }
+    },
     Query: {
         horaAtual() {
             return `${new Date}`
@@ -30,7 +35,7 @@ const resolvers = {
                 nome: 'João',
                 email: 'Joao@gmail.com',
                 idade: 20,
-                salario: 1000.00,
+                salario_real: 1000.00,
                 vip: true
             }
         }
