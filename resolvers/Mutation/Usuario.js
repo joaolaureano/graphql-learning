@@ -1,4 +1,4 @@
-const { usuarios, nextId } = require('../data/db')
+const { usuarios, nextId } = require('../../data/db')
 
 function indiceUsuario(filtro) {
     if (!filtro) return -1;
@@ -37,15 +37,15 @@ module.exports = {
         return  removed ? removed[0] : null
     },
 
-    alterarUsuario(_, args) {
-        const index = usuarios.findIndex(u => u.id === args.id)
+    alterarUsuario(_, {filtro, dados}) {
+        const index = indiceUsuario(filtro)
         if (index === -1) {
-            throw new Error('Usuário não encontrado')
+            return null
         }
         const user = usuarios.splice(index, 1)[0]
         const new_user = {
             ...user,
-            ...args
+            ...dados
         }
         usuarios.push(new_user)
         return new_user
