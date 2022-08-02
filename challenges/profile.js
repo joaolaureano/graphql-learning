@@ -71,9 +71,9 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         usuarios: () => usuarios,
-        usuario: (_, args) => usuarios.find(u => u.id === args.id),
-        usuarioPerfil: (_, args) => usuarios.filter(u => u.profile.id === args.id),
-        perfil: (_, args) => profiles.find(p => p.id === args.id),
+        usuario: (_, args) => usuarios.find(u => u.id === args.id) || null,
+        usuarioPerfil: (_, args) => usuarios.filter(u => u.profile.id === args.id) || null,
+        perfil: (_, args) => profiles.find(p => p.id === args.id) || null,
         perfis: () => profiles
         
     }
