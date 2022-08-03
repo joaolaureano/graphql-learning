@@ -73,12 +73,12 @@ const mutations = {
         ctx && ctx.validarUsuarioFiltro(filtro)
         try {
             const usuario = await obterUsuario(_, { filtro })
+            
             if(usuario) {
                 const { id } = usuario
                 if(ctx.admin && dados.perfis) {
                     await db('usuarios_perfis')
                         .where({ usuario_id: id }).delete()
-
                     for(let filtro of dados.perfis) {
                         const perfil = await obterPerfil(_, {
                             filtro
@@ -93,7 +93,9 @@ const mutations = {
                         }
                     }
                 }
-                if(dados.senha){
+
+                if(dados.senha) {
+                    // criptografar a senha
                     const salt = bcrypt.genSaltSync()
                     dados.senha = bcrypt.hashSync(dados.senha, salt)
                 }

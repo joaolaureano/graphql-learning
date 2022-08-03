@@ -33,8 +33,9 @@ export default {
     computed: {
         ...mapGetters(['usuario']),
         perfis() {
+            console.log(this.usuario.perfis)
             if(!this.usuario && !this.usuario.perfis) return null
-            return this.usuario.perfis.map(p => p.nome).join(', ')
+            return this.usuario.perfis.map(p => p.rotulo).join(', ')
         }
     },
     methods: mapActions(['setUsuario'])
