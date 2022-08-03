@@ -44,7 +44,7 @@ const mutations = {
             }
 
             return db('usuarios')
-                .where({ id }).first()
+                .where({ id: String(id) }).first()
         } catch(e) {
             throw new Error(e)
         }
