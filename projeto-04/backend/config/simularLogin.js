@@ -1,30 +1,31 @@
 const db = require('./db')
-const {getUsuarioLogado} = require("../resolvers/comum/usuario")
+const { getUsuarioLogado } = require('../resolvers/comum/usuario')
 
 const sql = `
     select
         u.*
-        from 
+    from
         usuarios u,
         usuarios_perfis up,
         perfis p
     where
         up.usuario_id = u.id and
         up.perfil_id = p.id and
-        u.ativo = 1 and
+        u.ativo = true and
         p.nome = :nomePerfil
+    limit 1
 `
 
 const getUsuario = async nomePerfil => {
-    const res = await db.raw(sql, {nomePerfil})
-    return res res[0][0] : null
+    const res = await db.raw(sql, { nomePerfil })
+    console.log()
+    return res.rows ? res.rows[0] : null
 }
 
 module.exports = async req => {
-    // Essa parte do code coloca o token de um usuário do tipo 'admin' na requisição
     const usuario = await getUsuario('admin')
-    if(usuario){
-        const { token} = await getUsuarioLogado()
+    if(usuario) {
+        const { token } = await getUsuarioLogado(usuario)
         req.headers = {
             authorization: `Bearer ${token}`
         }
