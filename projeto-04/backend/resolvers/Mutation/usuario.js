@@ -52,8 +52,8 @@ const mutations = {
         }
     },
     async excluirUsuario(_, args, ctx) {
+        console.log("here")
         if(ctx)ctx.validarAdmin()
-
         try {
             const usuario = await obterUsuario(_, args)
             if(usuario) {
