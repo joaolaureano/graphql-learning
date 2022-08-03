@@ -11,8 +11,9 @@ exports.up = function(knex, Promise) {
             { nome: 'master', rotulo: 'Master' },
         ])
     })
-};
-
-exports.down = function(knex, Promise) {
+  };
+  
+  exports.down = function(knex, Promise) {
     return knex.schema.dropTable('perfis')
-};
+  };
+  

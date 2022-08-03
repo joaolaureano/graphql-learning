@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --ext js,graphql"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/joaolaureano/graphql-learning#readme",
   "dependencies": {
+    "apollo-server": "^2.4.8",
+    "graphql": "^14.2.1",
+    "graphql-import": "^0.7.1",
     "knex": "^0.16.3",
+    "nodemon": "^2.0.19",
     "pg": "^8.7.3"
   }
 }
