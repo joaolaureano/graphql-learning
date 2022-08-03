@@ -1,33 +1,52 @@
 const db = require('../../config/db')
+const bcrypt = require('bcrypt-nodejs')
 const { perfil: obterPerfil } = require('../Query/perfil')
 const { usuario: obterUsuario } = require('../Query/usuario')
 
-module.exports = {
+const mutations = {
+    registrarUsuario(_,{dados}){
+        return mutations.novoUsuario(_, {
+            dados: {
+                nome: dados.nome,
+                email: dados.email,
+                senha: dados.senha
+            }
+        })
+    },
     async novoUsuario(_, { dados }) {
         try {
             const idsPerfis = []
-            if(dados.perfis) {
+
+            if(!dados.perfis || !dados.perfis.length){
+                dados.perfis = [{
+                    nome: 'comum'
+                }]
+            }
+            
                 for(let filtro of dados.perfis) {
                     const perfil = await obterPerfil(_, {
                         filtro
                     })
                     if(perfil) idsPerfis.push(perfil.id)
                 }
-            }
+
+                const salt = bcrypt.genSaltSync()
+                dados.senha = bcrypt.hashSync(dados.senha, salt)
 
             delete dados.perfis
-            const [ id ] = await db('usuarios')
-                .insert(dados)
+
+            const  id  = await db('usuarios')
+                .insert(dados, "id")
 
             for(let perfil_id of idsPerfis) {
                 await db('usuarios_perfis')
-                    .insert({ perfil_id, usuario_id: id })
+                    .insert({ perfil_id, usuario_id: String(id) })
             }
 
             return db('usuarios')
                 .where({ id }).first()
         } catch(e) {
-            throw new Error(e.sqlMessage)
+            throw new Error(e)
         }
     },
     async excluirUsuario(_, args) {
@@ -69,6 +88,10 @@ module.exports = {
                         }
                     }
                 }
+                if(dados.senha){
+                    const salt = bcrypt.genSaltSync()
+                    dados.senha = bcrypt.hashSync(dados.senha, salt)
+                }
 
                 delete dados.perfis
                 await db('usuarios')
@@ -81,3 +104,5 @@ module.exports = {
         }
     }
 }
+
+module.exports = mutations
