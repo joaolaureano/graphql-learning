@@ -20,6 +20,7 @@ Also developed some Docker code for the database
 This version is an End-2-End solution, with GraphQL/Knex in back end and Vue for the FrontEnd.
 It includes much more interesting technologies, such as JWT/Authentication and Context (both in GraphQL)
 All request now are being handled by the Vue side.
+Below, some screenshot examples of platform
 <img src="./.github/images/Login.png" width=800 height=500 >
 <img src="./.github/images/Consulta-Perfil.png" width=800 height=500 >
 <img src="./.github/images/Consulta-Usuario.png" width=800 height=500 >
