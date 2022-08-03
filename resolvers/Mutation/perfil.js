@@ -28,6 +28,19 @@ module.exports = {
         }
     },
     async alterarPerfil(_, { filtro, dados }) {
-        // implementar
+        try {
+            console.log(filtro)
+            const perfil = await obterPerfil(_, { filtro })
+            if (perfil) {
+                const perfil_id = perfil.id
+                await db('perfis').where({ id: perfil_id })
+                .update(dados)
+            }
+            return {...perfil, ...dados}
+
+        } catch (e) {
+            console.log(e)
+            throw new Error(e)
+        }
     }
 }
