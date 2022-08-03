@@ -21,6 +21,7 @@ const getUsuario = async nomePerfil => {
 }
 
 module.exports = async req => {
+    // Essa parte do code coloca o token de um usuário do tipo 'admin' na requisição
     const usuario = await getUsuario('admin')
     if(usuario){
         const { token} = await getUsuarioLogado()
