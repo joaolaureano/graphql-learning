@@ -6,7 +6,7 @@ const novoPerfil = {
     rotulo: 'Cadastrador'
 }
 
-db('perfis').insert(novoPerfil)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-    .finally(() => db.destroy())
+// db('perfis').insert(novoPerfil)
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err))
+//     .finally(() => db.destroy())
