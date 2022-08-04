@@ -6,8 +6,9 @@ exports.up = function(knex, Promise) {
       table.string('rotulo').notNull()
   }).then(function () {
       return knex('perfis').insert([
+          { nome: 'administrador', rotulo: 'Administrador' },
           { nome: 'comum', rotulo: 'Comum' },
-          { nome: 'admin', rotulo: 'Administrador' },
+          { nome: 'master', rotulo: 'Master' },
       ])
   })
 };

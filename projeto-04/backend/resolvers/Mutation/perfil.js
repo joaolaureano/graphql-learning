@@ -3,7 +3,7 @@ const { perfil: obterPerfil } = require('../Query/perfil')
 
 module.exports = {
     async novoPerfil(_, { dados }, ctx) {
-        // if(ctx)ctx.validarAdmin()
+        if(ctx)ctx.validarAdmin()
         try {
             const result = await db('perfis').insert({
                 nome: dados.nome,
