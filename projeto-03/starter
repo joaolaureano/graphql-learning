@@ -1,0 +1,4 @@
+docker-compose up -d
+npm i
+npx knex migrate:latest
+npm run start
