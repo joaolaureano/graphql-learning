@@ -6,9 +6,6 @@ const typeDefs = gql`
         horaAtual: String
     }
 `
-
-
-
 const resolvers = {
     Query: {
         horaAtual() {

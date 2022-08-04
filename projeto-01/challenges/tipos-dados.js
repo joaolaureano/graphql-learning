@@ -2,7 +2,6 @@ const {ApolloServer, gql} = require('apollo-server')
 
 
 const typeDefs = gql`
-    scalar Date
 
     type Usuario {
         id: ID
@@ -14,7 +13,6 @@ const typeDefs = gql`
     }
 
     type Query {
-        horaAtual: Date
         usuarioLogado: Usuario
     }
 `
@@ -26,9 +24,6 @@ const resolvers = {
         }
     },
     Query: {
-        horaAtual() {
-            return `${new Date}`
-        },
         usuarioLogado() {
             return {
                 id: '1',

@@ -1,17 +1,19 @@
 const {ApolloServer, gql} = require('apollo-server')
 
-
 const typeDefs = gql`
-    scalar Date
 
     type Produto {
         id: ID
         nome: String!
         preco: String!
         desconto: Float
+        precoComDesconto: Float!
+    }
+
+    type Query{
+        produtoEmDestaque: Produto
     }
 `
-
 const resolvers = {
     Produto: {
         precoComDesconto(produto) {
