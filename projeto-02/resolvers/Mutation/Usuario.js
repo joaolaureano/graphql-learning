@@ -36,7 +36,6 @@ module.exports = {
         const removed = usuarios.splice(index, 1)
         return  removed ? removed[0] : null
     },
-
     alterarUsuario(_, {filtro, dados}) {
         const index = indiceUsuario(filtro)
         if (index === -1) {

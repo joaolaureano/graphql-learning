@@ -34,7 +34,6 @@ module.exports = {
         const removed = perfis.splice(index, 1)
         return  removed ? removed[0] : null
     },
-
     alterarPerfil(_, {filtro, dados}) {
         const index = indiceProfile(filtro)
         if (index === -1) {
